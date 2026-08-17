@@ -1,0 +1,55 @@
+{
+  "id": "L07_npm_network",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "stuck"
+    ],
+    "intervene_levels": [
+      "soft"
+    ]
+  },
+  "available_tools": [
+    "npm_install",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "npm_install",
+      "args": {
+        "packages": [
+          "left-pad"
+        ]
+      },
+      "error": "ECONNREFUSED"
+    },
+    {
+      "tool_name": "npm_install",
+      "args": {
+        "packages": [
+          "left-pad"
+        ]
+      },
+      "error": "ECONNREFUSED"
+    },
+    {
+      "tool_name": "npm_install",
+      "args": {
+        "packages": [
+          "left-pad"
+        ]
+      },
+      "error": "ECONNREFUSED"
+    },
+    {
+      "tool_name": "npm_install",
+      "args": {
+        "packages": [
+          "left-pad"
+        ]
+      },
+      "error": "ECONNREFUSED"
+    }
+  ]
+}

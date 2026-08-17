@@ -1,0 +1,19 @@
+{
+  "v": "lexloop/v1",
+  "id": "01M0872B3VZQ97PC0KR4BX4778",
+  "ts": "2026-08-17T15:00:00.145Z",
+  "run_id": "run_01M0872B3TQBTD4MD5FSFA5PMG",
+  "session_id": "ses_01M0872B3TPV6Z6EQJGP9B05V2",
+  "seq": 2,
+  "name": "loop_classified",
+  "payload": {
+    "v": "lexloop/v1",
+    "loop_id": "loop_e9a80e68a466c7e4766a0a5e80",
+    "cluster_id": "clus_e4c291d483eb94c5",
+    "class": "stuck",
+    "rule_id": "R09",
+    "belief_source": "none",
+    "progress_signal": false,
+    "reasons": ["R09"]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "id": "L01_bash_enoent",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "stuck"
+    ],
+    "intervene_levels": [
+      "soft"
+    ],
+    "unstuck": true
+  },
+  "available_tools": [
+    "bash",
+    "read_file",
+    "edit_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    }
+  ],
+  "steps_after_inject": [
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "ls /tmp"
+      },
+      "result": {
+        "ok": true
+      }
+    }
+  ]
+}

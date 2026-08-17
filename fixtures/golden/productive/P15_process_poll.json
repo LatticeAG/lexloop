@@ -1,0 +1,125 @@
+{
+  "id": "P15_process_poll",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "productive"
+    ],
+    "intervene_levels": []
+  },
+  "available_tools": [
+    "process",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "process",
+      "args": {
+        "pid": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "process",
+      "args": {
+        "pid": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "process",
+      "args": {
+        "pid": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "process",
+      "args": {
+        "pid": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "process",
+      "args": {
+        "pid": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "process",
+      "args": {
+        "pid": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "process",
+      "args": {
+        "pid": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "process",
+      "args": {
+        "pid": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "process",
+      "args": {
+        "pid": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "process",
+      "args": {
+        "pid": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "process",
+      "args": {
+        "pid": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "process",
+      "args": {
+        "pid": 1
+      },
+      "result": {
+        "ok": true
+      }
+    }
+  ]
+}

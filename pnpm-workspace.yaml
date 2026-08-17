@@ -1,0 +1,6 @@
+packages:
+  - packages/core
+  - packages/events-ext
+  - packages/config
+  - packages/sdk
+  - packages/cli

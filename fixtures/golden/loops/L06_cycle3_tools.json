@@ -1,0 +1,84 @@
+{
+  "id": "L06_cycle3_tools",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "thrashing"
+    ],
+    "intervene_levels": [
+      "soft"
+    ]
+  },
+  "available_tools": [
+    "t1",
+    "t2",
+    "t3",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "t1",
+      "args": {
+        "n": 1
+      },
+      "error": "invalid"
+    },
+    {
+      "tool_name": "t2",
+      "args": {
+        "n": 2
+      },
+      "error": "invalid"
+    },
+    {
+      "tool_name": "t3",
+      "args": {
+        "n": 3
+      },
+      "error": "invalid"
+    },
+    {
+      "tool_name": "t1",
+      "args": {
+        "n": 1
+      },
+      "error": "invalid"
+    },
+    {
+      "tool_name": "t2",
+      "args": {
+        "n": 2
+      },
+      "error": "invalid"
+    },
+    {
+      "tool_name": "t3",
+      "args": {
+        "n": 3
+      },
+      "error": "invalid"
+    },
+    {
+      "tool_name": "t1",
+      "args": {
+        "n": 1
+      },
+      "error": "invalid"
+    },
+    {
+      "tool_name": "t2",
+      "args": {
+        "n": 2
+      },
+      "error": "invalid"
+    },
+    {
+      "tool_name": "t3",
+      "args": {
+        "n": 3
+      },
+      "error": "invalid"
+    }
+  ]
+}

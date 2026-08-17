@@ -1,0 +1,146 @@
+{
+  "$ref": "#/definitions/LatticeExtensionEnvelope",
+  "definitions": {
+    "LatticeExtensionEnvelope": {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "const": "latticeag.events/1.0"
+        },
+        "schema_version": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "ts": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$"
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "producer": {
+          "type": "object",
+          "properties": {
+            "product": {
+              "type": "string",
+              "const": "latticeag"
+            },
+            "adapter": {
+              "type": "string",
+              "const": "@latticeag/lexloop"
+            },
+            "adapter_version": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "product",
+            "adapter",
+            "adapter_version"
+          ],
+          "additionalProperties": false
+        },
+        "correlation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "causation_id": {
+          "type": "string"
+        },
+        "redaction": {
+          "type": "object",
+          "properties": {
+            "applied": {
+              "type": "boolean"
+            },
+            "keys": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pattern_hits": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "applied",
+            "keys",
+            "pattern_hits"
+          ],
+          "additionalProperties": false
+        },
+        "name": {
+          "type": "string",
+          "const": "extension"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "extension_name": {
+              "type": "string",
+              "enum": [
+                "lexloop.loop_detected",
+                "lexloop.loop_classified",
+                "lexloop.intervention_injected",
+                "lexloop.loop_escalated",
+                "lexloop.budget_skipped",
+                "lexloop.run_summary"
+              ]
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "v": {
+                  "type": "string",
+                  "const": "lexloop/v1"
+                }
+              },
+              "required": [
+                "v"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "extension_name",
+            "payload"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "$schema",
+        "schema_version",
+        "id",
+        "seq",
+        "ts",
+        "run_id",
+        "session_id",
+        "producer",
+        "correlation_id",
+        "redaction",
+        "name",
+        "payload"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

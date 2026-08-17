@@ -1,0 +1,107 @@
+{
+  "id": "P02_poll_status",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "productive"
+    ],
+    "intervene_levels": []
+  },
+  "available_tools": [
+    "get_status",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "get_status",
+      "args": {
+        "job_id": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "get_status",
+      "args": {
+        "job_id": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "get_status",
+      "args": {
+        "job_id": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "get_status",
+      "args": {
+        "job_id": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "get_status",
+      "args": {
+        "job_id": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "get_status",
+      "args": {
+        "job_id": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "get_status",
+      "args": {
+        "job_id": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "get_status",
+      "args": {
+        "job_id": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "get_status",
+      "args": {
+        "job_id": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "get_status",
+      "args": {
+        "job_id": 1
+      },
+      "result": {
+        "ok": true
+      }
+    }
+  ]
+}

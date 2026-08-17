@@ -1,0 +1,70 @@
+{
+  "id": "L14_parallel_then_repeat",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "stuck"
+    ],
+    "intervene_levels": [
+      "soft"
+    ]
+  },
+  "available_tools": [
+    "a",
+    "b",
+    "c",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "a",
+      "args": {
+        "id": "a"
+      },
+      "error": "ENOENT"
+    },
+    {
+      "tool_name": "b",
+      "args": {
+        "id": "b"
+      },
+      "error": "EACCES"
+    },
+    {
+      "tool_name": "c",
+      "args": {
+        "id": "c"
+      },
+      "error": "invalid"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /x"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /x"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /x"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /x"
+      },
+      "error": "ENOENT: no such file"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "id": "L02_key_reorder",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "stuck"
+    ],
+    "intervene_levels": [
+      "soft"
+    ]
+  },
+  "available_tools": [
+    "submit",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "submit",
+      "args": {
+        "b": 1,
+        "a": 2
+      },
+      "error": "invalid payload"
+    },
+    {
+      "tool_name": "submit",
+      "args": {
+        "a": 2,
+        "b": 1
+      },
+      "error": "invalid payload"
+    },
+    {
+      "tool_name": "submit",
+      "args": {
+        "b": 1,
+        "a": 2
+      },
+      "error": "invalid payload"
+    },
+    {
+      "tool_name": "submit",
+      "args": {
+        "a": 2,
+        "b": 1
+      },
+      "error": "invalid payload"
+    }
+  ]
+}

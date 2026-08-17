@@ -1,0 +1,53 @@
+{
+  "id": "P04_read_many",
+  "expect": {
+    "detect_any": false,
+    "classes": [
+      "productive"
+    ],
+    "intervene_levels": []
+  },
+  "available_tools": [
+    "read_file",
+    "bash",
+    "edit_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "read_file",
+      "args": {
+        "path": "a.ts"
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "read_file",
+      "args": {
+        "path": "b.ts"
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "read_file",
+      "args": {
+        "path": "c.ts"
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "read_file",
+      "args": {
+        "path": "d.ts"
+      },
+      "result": {
+        "ok": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "v": "lexloop/v1",
+  "id": "01M0872B3XK1AR7A23DE80VJW0",
+  "ts": "2026-08-17T15:01:00.000Z",
+  "run_id": "run_01M0872B3TQBTD4MD5FSFA5PMG",
+  "session_id": "ses_01M0872B3TPV6Z6EQJGP9B05V2",
+  "seq": 6,
+  "name": "run_summary",
+  "payload": {
+    "v": "lexloop/v1",
+    "loop_count": 1,
+    "by_class": {
+      "productive": 0,
+      "stuck": 1,
+      "thrashing": 0
+    },
+    "interventions": 1,
+    "unstick_true": 0,
+    "unstick_false": 0,
+    "unstick_unknown": 1,
+    "detect_p99_ms": 0.42,
+    "belief_source": "none"
+  }
+}

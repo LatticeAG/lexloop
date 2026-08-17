@@ -1,0 +1,67 @@
+{
+  "id": "L04_edit_revert_thrash",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "thrashing"
+    ],
+    "intervene_levels": [
+      "soft"
+    ]
+  },
+  "available_tools": [
+    "edit_file",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "edit_file",
+      "args": {
+        "path": "P",
+        "content": "A"
+      },
+      "error": "syntax error"
+    },
+    {
+      "tool_name": "edit_file",
+      "args": {
+        "path": "P",
+        "content": "B"
+      },
+      "error": "syntax error"
+    },
+    {
+      "tool_name": "edit_file",
+      "args": {
+        "path": "P",
+        "content": "A"
+      },
+      "error": "syntax error"
+    },
+    {
+      "tool_name": "edit_file",
+      "args": {
+        "path": "P",
+        "content": "B"
+      },
+      "error": "syntax error"
+    },
+    {
+      "tool_name": "edit_file",
+      "args": {
+        "path": "P",
+        "content": "A"
+      },
+      "error": "syntax error"
+    },
+    {
+      "tool_name": "edit_file",
+      "args": {
+        "path": "P",
+        "content": "B"
+      },
+      "error": "syntax error"
+    }
+  ]
+}

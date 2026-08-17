@@ -1,0 +1,51 @@
+{
+  "id": "L15_conflict_409",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "stuck"
+    ],
+    "intervene_levels": [
+      "soft"
+    ]
+  },
+  "available_tools": [
+    "create_invoice",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "create_invoice",
+      "args": {
+        "customer_id": "c1",
+        "amount": 10
+      },
+      "http_status": 409
+    },
+    {
+      "tool_name": "create_invoice",
+      "args": {
+        "customer_id": "c1",
+        "amount": 10
+      },
+      "http_status": 409
+    },
+    {
+      "tool_name": "create_invoice",
+      "args": {
+        "customer_id": "c1",
+        "amount": 10
+      },
+      "http_status": 409
+    },
+    {
+      "tool_name": "create_invoice",
+      "args": {
+        "customer_id": "c1",
+        "amount": 10
+      },
+      "http_status": 409
+    }
+  ]
+}

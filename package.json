@@ -1,0 +1,29 @@
+{
+  "name": "lexloop",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "build": "pnpm -r --filter @latticeag/lexloop-cli build",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lexloop": "node packages/cli/dist/cli.js"
+  },
+  "devDependencies": {
+    "@latticeag/lexloop": "workspace:*",
+    "@latticeag/lexloop-cli": "workspace:*",
+    "@latticeag/lexloop-config": "workspace:*",
+    "@latticeag/lexloop-core": "workspace:*",
+    "@latticeag/lexloop-events": "workspace:*",
+    "@types/node": "^22.15.3",
+    "tsx": "^4.19.4",
+    "typescript": "~5.8.3",
+    "vitest": "^3.2.4",
+    "zod": "^3.25.76"
+  }
+}

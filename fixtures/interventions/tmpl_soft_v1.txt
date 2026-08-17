@@ -1,0 +1,7 @@
+[lexloop intervention id=llint_01ARZ3NDEKTSV4RRFFQ69G5FAV level=soft]
+Observed: tool bash repeated 5 times with equivalent arguments.
+Outcomes: err_not_found=5
+Tried tools: bash
+Not tried tools: read_file, grep
+Arguments: unchanged across attempts
+Next step: pick a not-tried tool, or change an argument. Do not repeat the same call.

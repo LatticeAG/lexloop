@@ -1,0 +1,57 @@
+{
+  "id": "P11_ok_repeat_nonpoll",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "productive"
+    ],
+    "intervene_levels": []
+  },
+  "available_tools": [
+    "write_file",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "write_file",
+      "args": {
+        "path": "out.txt",
+        "content": "x"
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "write_file",
+      "args": {
+        "path": "out.txt",
+        "content": "x"
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "write_file",
+      "args": {
+        "path": "out.txt",
+        "content": "x"
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "write_file",
+      "args": {
+        "path": "out.txt",
+        "content": "x"
+      },
+      "result": {
+        "ok": true
+      }
+    }
+  ]
+}

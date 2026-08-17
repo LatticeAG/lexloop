@@ -1,0 +1,38 @@
+{
+  "id": "P10_three_without_axion",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "productive"
+    ],
+    "intervene_levels": []
+  },
+  "available_tools": [
+    "bash",
+    "read_file",
+    "edit_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    }
+  ]
+}

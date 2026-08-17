@@ -1,0 +1,31 @@
+{
+  "v": "lexloop/v1",
+  "id": "01M0872B3WMHFSXDYCJA0W3S36",
+  "ts": "2026-08-17T15:00:00.180Z",
+  "run_id": "run_01M0872B3TQBTD4MD5FSFA5PMG",
+  "session_id": "ses_01M0872B3TPV6Z6EQJGP9B05V2",
+  "seq": 3,
+  "name": "intervention_injected",
+  "payload": {
+    "v": "lexloop/v1",
+    "loop_id": "loop_e9a80e68a466c7e4766a0a5e80",
+    "cluster_id": "clus_e4c291d483eb94c5",
+    "intervention_id": "llint_01M0872B3Y7Y6K02B6K3Z3QSGQ",
+    "level": "soft",
+    "template_version": "tmpl_soft_v1",
+    "fingerprint": "a7f8c3d2e1b0495a6c8d9e0f1a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d",
+    "role": "system",
+    "chars": 412,
+    "delta": {
+      "tried_tools": ["bash"],
+      "untried_tools": ["read_file", "grep"],
+      "frozen_arg_hashes": true,
+      "tried_outcomes": [
+        {
+          "class": "err_not_found",
+          "n": 5
+        }
+      ]
+    }
+  }
+}

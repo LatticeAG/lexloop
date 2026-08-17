@@ -1,0 +1,47 @@
+{
+  "id": "L13_unknown_tool_retry",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "stuck"
+    ],
+    "intervene_levels": [
+      "soft"
+    ]
+  },
+  "available_tools": [
+    "unknown_tool",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "unknown_tool",
+      "args": {
+        "x": 1
+      },
+      "error": "unknown tool"
+    },
+    {
+      "tool_name": "unknown_tool",
+      "args": {
+        "x": 1
+      },
+      "error": "unknown tool"
+    },
+    {
+      "tool_name": "unknown_tool",
+      "args": {
+        "x": 1
+      },
+      "error": "unknown tool"
+    },
+    {
+      "tool_name": "unknown_tool",
+      "args": {
+        "x": 1
+      },
+      "error": "unknown tool"
+    }
+  ]
+}

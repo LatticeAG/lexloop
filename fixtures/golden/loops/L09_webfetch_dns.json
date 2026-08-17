@@ -1,0 +1,47 @@
+{
+  "id": "L09_webfetch_dns",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "stuck"
+    ],
+    "intervene_levels": [
+      "soft"
+    ]
+  },
+  "available_tools": [
+    "web_fetch",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "web_fetch",
+      "args": {
+        "url": "https://missing.invalid"
+      },
+      "error": "DNS ENOTFOUND"
+    },
+    {
+      "tool_name": "web_fetch",
+      "args": {
+        "url": "https://missing.invalid"
+      },
+      "error": "DNS ENOTFOUND"
+    },
+    {
+      "tool_name": "web_fetch",
+      "args": {
+        "url": "https://missing.invalid"
+      },
+      "error": "DNS ENOTFOUND"
+    },
+    {
+      "tool_name": "web_fetch",
+      "args": {
+        "url": "https://missing.invalid"
+      },
+      "error": "DNS ENOTFOUND"
+    }
+  ]
+}

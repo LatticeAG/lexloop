@@ -1,0 +1,51 @@
+{
+  "id": "L08_write_eacces",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "stuck"
+    ],
+    "intervene_levels": [
+      "soft"
+    ]
+  },
+  "available_tools": [
+    "write_file",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "write_file",
+      "args": {
+        "path": "/etc/shadow",
+        "content": "x"
+      },
+      "error": "EACCES"
+    },
+    {
+      "tool_name": "write_file",
+      "args": {
+        "path": "/etc/shadow",
+        "content": "x"
+      },
+      "error": "EACCES"
+    },
+    {
+      "tool_name": "write_file",
+      "args": {
+        "path": "/etc/shadow",
+        "content": "x"
+      },
+      "error": "EACCES"
+    },
+    {
+      "tool_name": "write_file",
+      "args": {
+        "path": "/etc/shadow",
+        "content": "x"
+      },
+      "error": "EACCES"
+    }
+  ]
+}

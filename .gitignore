@@ -1,0 +1,8 @@
+node_modules
+dist
+.lexloop/
+.env
+.env.*
+!.env.example
+*SPEC*.md
+*.pem

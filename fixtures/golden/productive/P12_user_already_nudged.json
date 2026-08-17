@@ -1,0 +1,53 @@
+{
+  "id": "P12_user_already_nudged",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "productive"
+    ],
+    "intervene_levels": []
+  },
+  "available_tools": [
+    "bash",
+    "read_file",
+    "edit_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file",
+      "text": "[lexloop intervention id=llint_01ARZ3NDEKTSV4RRFFQ69G5FAV level=soft]"
+    }
+  ]
+}

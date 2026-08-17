@@ -1,0 +1,56 @@
+{
+  "id": "L12_sleep_then_same",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "stuck"
+    ],
+    "intervene_levels": [
+      "soft"
+    ]
+  },
+  "available_tools": [
+    "sleep",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "sleep",
+      "args": {
+        "seconds": 1
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "cat /nope"
+      },
+      "error": "ENOENT: no such file"
+    }
+  ]
+}

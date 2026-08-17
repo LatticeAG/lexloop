@@ -1,0 +1,47 @@
+{
+  "id": "L03_timestamped_stderr",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "stuck"
+    ],
+    "intervene_levels": [
+      "soft"
+    ]
+  },
+  "available_tools": [
+    "run_job",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "run_job",
+      "args": {
+        "id": 1
+      },
+      "error": "fail at 12:01:00"
+    },
+    {
+      "tool_name": "run_job",
+      "args": {
+        "id": 1
+      },
+      "error": "fail at 12:01:01"
+    },
+    {
+      "tool_name": "run_job",
+      "args": {
+        "id": 1
+      },
+      "error": "fail at 12:01:02"
+    },
+    {
+      "tool_name": "run_job",
+      "args": {
+        "id": 1
+      },
+      "error": "fail at 12:01:03"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "L10_git_commit_hook",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "stuck"
+    ],
+    "intervene_levels": [
+      "soft"
+    ]
+  },
+  "available_tools": [
+    "bash",
+    "read_file",
+    "edit_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "git commit"
+      },
+      "error": "hook rejected"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "git commit"
+      },
+      "error": "hook rejected"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "git commit"
+      },
+      "error": "hook rejected"
+    },
+    {
+      "tool_name": "bash",
+      "args": {
+        "cmd": "git commit"
+      },
+      "error": "hook rejected"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "L05_search_read_pingpong",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "thrashing"
+    ],
+    "intervene_levels": [
+      "soft"
+    ]
+  },
+  "available_tools": [
+    "search",
+    "read",
+    "bash",
+    "edit_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "search",
+      "args": {
+        "q": "X"
+      },
+      "error": "not found"
+    },
+    {
+      "tool_name": "read",
+      "args": {
+        "path": "Y"
+      },
+      "error": "not found"
+    },
+    {
+      "tool_name": "search",
+      "args": {
+        "q": "X"
+      },
+      "error": "not found"
+    },
+    {
+      "tool_name": "read",
+      "args": {
+        "path": "Y"
+      },
+      "error": "not found"
+    },
+    {
+      "tool_name": "search",
+      "args": {
+        "q": "X"
+      },
+      "error": "not found"
+    },
+    {
+      "tool_name": "read",
+      "args": {
+        "path": "Y"
+      },
+      "error": "not found"
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+[
+  {
+    "id": "ok_true_payload",
+    "result": { "ok": true },
+    "expect_class": "ok",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "ok_http_200",
+    "http_status": 200,
+    "result": { "data": "yes" },
+    "expect_class": "ok",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "empty_list_default_ok",
+    "result": [],
+    "empty_as_error": false,
+    "expect_class": "ok",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "empty_list_p08_default",
+    "result": [],
+    "expect_class": "ok",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "empty_list_as_error",
+    "result": [],
+    "empty_as_error": true,
+    "expect_class": "err_empty",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "empty_string_as_error",
+    "result": "",
+    "empty_as_error": true,
+    "expect_class": "err_empty",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "empty_object_as_error",
+    "result": {},
+    "empty_as_error": true,
+    "expect_class": "err_empty",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "empty_items_as_error",
+    "result": { "items": [] },
+    "empty_as_error": true,
+    "expect_class": "err_empty",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "enoent",
+    "error": "ENOENT: no such file or directory",
+    "expect_class": "err_not_found",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "http_404",
+    "http_status": 404,
+    "expect_class": "err_not_found",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "eacces",
+    "error": "EACCES: permission denied",
+    "expect_class": "err_permission",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "http_403",
+    "http_status": 403,
+    "expect_class": "err_permission",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "http_401",
+    "http_status": 401,
+    "expect_class": "err_permission",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "timeout_fetch_abort",
+    "error": "TimeoutError: fetch abort timeout",
+    "expect_class": "err_timeout",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "etimedout",
+    "error": "ETIMEDOUT",
+    "expect_class": "err_timeout",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "http_429",
+    "http_status": 429,
+    "expect_class": "err_rate_limit",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "rate_limit_text",
+    "error": "429 too many requests",
+    "expect_class": "err_rate_limit",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "syntax_error",
+    "error": "syntax error: unexpected token",
+    "expect_class": "err_invalid",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "http_400",
+    "http_status": 400,
+    "expect_class": "err_invalid",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "http_422",
+    "http_status": 422,
+    "expect_class": "err_invalid",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "zod_fail",
+    "error": "Zod fail: json schema mismatch",
+    "expect_class": "err_invalid",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "econnrefused",
+    "error": "ECONNREFUSED",
+    "expect_class": "err_network",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "dns",
+    "error": "DNS lookup failed",
+    "expect_class": "err_network",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "http_502",
+    "http_status": 502,
+    "expect_class": "err_network",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "http_409_no_body",
+    "http_status": 409,
+    "expect_class": "err_conflict",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "conflict_text",
+    "error": "git lock 409 already exists",
+    "expect_class": "err_conflict",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "err_other_unique",
+    "error": "unique boom xyz from compiler backend",
+    "expect_class": "err_other",
+    "expect_hash_is_class": false
+  },
+  {
+    "id": "timestamped_stderr_a",
+    "error": "fail at 12:01:00",
+    "expect_class": "err_other",
+    "expect_hash_is_class": false
+  },
+  {
+    "id": "timestamped_stderr_b",
+    "error": "fail at 12:01:01",
+    "expect_class": "err_other",
+    "expect_hash_is_class": false
+  },
+  {
+    "id": "http_200_error_payload_not_found",
+    "http_status": 200,
+    "result": { "error": "not found" },
+    "expect_class": "err_not_found",
+    "expect_hash_is_class": true
+  },
+  {
+    "id": "result_status_404",
+    "result": { "status": 404 },
+    "expect_class": "err_not_found",
+    "expect_hash_is_class": true
+  }
+]

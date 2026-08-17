@@ -1,0 +1,620 @@
+{
+  "$ref": "#/definitions/LexLoopEvent",
+  "definitions": {
+    "LexLoopEvent": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "v": {
+              "type": "string",
+              "const": "lexloop/v1"
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+            },
+            "ts": {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "Z$"
+            },
+            "run_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "session_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "seq": {
+              "type": "integer",
+              "exclusiveMinimum": 0
+            },
+            "name": {
+              "type": "string",
+              "const": "loop_detected"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "v": {
+                  "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/v"
+                },
+                "loop_id": {
+                  "type": "string",
+                  "pattern": "^loop_[0-9a-f]{26}$"
+                },
+                "cluster_id": {
+                  "type": "string",
+                  "pattern": "^clus_[0-9a-f]{16}$"
+                },
+                "pattern": {
+                  "type": "string",
+                  "enum": [
+                    "exact_repeat",
+                    "ping_pong",
+                    "cycle"
+                  ]
+                },
+                "signatures": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "run_length": {
+                  "type": "integer"
+                },
+                "cycle_length": {
+                  "type": "integer"
+                },
+                "poll": {
+                  "type": "boolean"
+                },
+                "tool_name": {
+                  "type": "string"
+                },
+                "outcome_class": {
+                  "type": "string",
+                  "enum": [
+                    "ok",
+                    "err_not_found",
+                    "err_permission",
+                    "err_timeout",
+                    "err_rate_limit",
+                    "err_invalid",
+                    "err_network",
+                    "err_conflict",
+                    "err_empty",
+                    "err_other"
+                  ]
+                },
+                "window_used": {
+                  "type": "integer"
+                },
+                "detect_ms": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "v",
+                "loop_id",
+                "cluster_id",
+                "pattern",
+                "signatures",
+                "run_length",
+                "cycle_length",
+                "poll",
+                "tool_name",
+                "outcome_class",
+                "window_used",
+                "detect_ms"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "v",
+            "id",
+            "ts",
+            "run_id",
+            "session_id",
+            "seq",
+            "name",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "v": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/v"
+            },
+            "id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/id"
+            },
+            "ts": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/ts"
+            },
+            "run_id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/run_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/session_id"
+            },
+            "seq": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/seq"
+            },
+            "name": {
+              "type": "string",
+              "const": "loop_classified"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "v": {
+                  "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/v"
+                },
+                "loop_id": {
+                  "type": "string",
+                  "pattern": "^loop_[0-9a-f]{26}$"
+                },
+                "cluster_id": {
+                  "type": "string",
+                  "pattern": "^clus_[0-9a-f]{16}$"
+                },
+                "class": {
+                  "type": "string",
+                  "enum": [
+                    "productive",
+                    "stuck",
+                    "thrashing"
+                  ]
+                },
+                "rule_id": {
+                  "type": "string"
+                },
+                "belief_source": {
+                  "type": "string",
+                  "enum": [
+                    "axion",
+                    "none"
+                  ]
+                },
+                "belief_jaccard": {
+                  "type": "number"
+                },
+                "revision_signal": {
+                  "type": "number"
+                },
+                "progress_signal": {
+                  "type": "boolean"
+                },
+                "reasons": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "v",
+                "loop_id",
+                "cluster_id",
+                "class",
+                "rule_id",
+                "belief_source",
+                "progress_signal",
+                "reasons"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "v",
+            "id",
+            "ts",
+            "run_id",
+            "session_id",
+            "seq",
+            "name",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "v": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/v"
+            },
+            "id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/id"
+            },
+            "ts": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/ts"
+            },
+            "run_id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/run_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/session_id"
+            },
+            "seq": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/seq"
+            },
+            "name": {
+              "type": "string",
+              "const": "intervention_injected"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "v": {
+                  "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/v"
+                },
+                "loop_id": {
+                  "type": "string",
+                  "pattern": "^loop_[0-9a-f]{26}$"
+                },
+                "cluster_id": {
+                  "type": "string",
+                  "pattern": "^clus_[0-9a-f]{16}$"
+                },
+                "intervention_id": {
+                  "type": "string",
+                  "pattern": "^llint_[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+                },
+                "level": {
+                  "type": "string",
+                  "enum": [
+                    "soft",
+                    "hard",
+                    "human"
+                  ]
+                },
+                "template_version": {
+                  "type": "string"
+                },
+                "fingerprint": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "system",
+                    "user"
+                  ]
+                },
+                "chars": {
+                  "type": "integer"
+                },
+                "delta": {
+                  "type": "object",
+                  "properties": {
+                    "tried_tools": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "untried_tools": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "frozen_arg_hashes": {
+                      "type": "boolean"
+                    },
+                    "tried_outcomes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "class": {
+                            "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/payload/properties/outcome_class"
+                          },
+                          "n": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "class",
+                          "n"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "tried_tools",
+                    "untried_tools",
+                    "frozen_arg_hashes",
+                    "tried_outcomes"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "v",
+                "loop_id",
+                "cluster_id",
+                "intervention_id",
+                "level",
+                "template_version",
+                "fingerprint",
+                "role",
+                "chars",
+                "delta"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "v",
+            "id",
+            "ts",
+            "run_id",
+            "session_id",
+            "seq",
+            "name",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "v": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/v"
+            },
+            "id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/id"
+            },
+            "ts": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/ts"
+            },
+            "run_id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/run_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/session_id"
+            },
+            "seq": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/seq"
+            },
+            "name": {
+              "type": "string",
+              "const": "loop_escalated"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "v": {
+                  "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/v"
+                },
+                "loop_id": {
+                  "type": "string",
+                  "pattern": "^loop_[0-9a-f]{26}$"
+                },
+                "cluster_id": {
+                  "type": "string",
+                  "pattern": "^clus_[0-9a-f]{16}$"
+                },
+                "level": {
+                  "type": "string",
+                  "const": "human"
+                },
+                "vekinbox_request_id": {
+                  "type": "string"
+                },
+                "halt_recommended": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "rule_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "v",
+                "loop_id",
+                "cluster_id",
+                "level",
+                "halt_recommended",
+                "rule_id"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "v",
+            "id",
+            "ts",
+            "run_id",
+            "session_id",
+            "seq",
+            "name",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "v": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/v"
+            },
+            "id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/id"
+            },
+            "ts": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/ts"
+            },
+            "run_id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/run_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/session_id"
+            },
+            "seq": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/seq"
+            },
+            "name": {
+              "type": "string",
+              "const": "budget_skipped"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "v": {
+                  "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/v"
+                },
+                "reason": {
+                  "type": "string",
+                  "enum": [
+                    "detect_budget",
+                    "ring_overflow",
+                    "semantic_budget",
+                    "ladder_hold",
+                    "oversize_intervention"
+                  ]
+                },
+                "budget_ms": {
+                  "type": "number"
+                },
+                "elapsed_ms": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "v",
+                "reason"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "v",
+            "id",
+            "ts",
+            "run_id",
+            "session_id",
+            "seq",
+            "name",
+            "payload"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "v": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/v"
+            },
+            "id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/id"
+            },
+            "ts": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/ts"
+            },
+            "run_id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/run_id"
+            },
+            "session_id": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/session_id"
+            },
+            "seq": {
+              "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/seq"
+            },
+            "name": {
+              "type": "string",
+              "const": "run_summary"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "v": {
+                  "$ref": "#/definitions/LexLoopEvent/anyOf/0/properties/v"
+                },
+                "loop_count": {
+                  "type": "integer"
+                },
+                "by_class": {
+                  "type": "object",
+                  "properties": {
+                    "productive": {
+                      "type": "integer"
+                    },
+                    "stuck": {
+                      "type": "integer"
+                    },
+                    "thrashing": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "productive",
+                    "stuck",
+                    "thrashing"
+                  ],
+                  "additionalProperties": false
+                },
+                "interventions": {
+                  "type": "integer"
+                },
+                "unstick_true": {
+                  "type": "integer"
+                },
+                "unstick_false": {
+                  "type": "integer"
+                },
+                "unstick_unknown": {
+                  "type": "integer"
+                },
+                "detect_p99_ms": {
+                  "type": "number"
+                },
+                "belief_source": {
+                  "type": "string",
+                  "enum": [
+                    "axion",
+                    "none",
+                    "mixed"
+                  ]
+                }
+              },
+              "required": [
+                "v",
+                "loop_count",
+                "by_class",
+                "interventions",
+                "unstick_true",
+                "unstick_false",
+                "unstick_unknown",
+                "detect_p99_ms",
+                "belief_source"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "v",
+            "id",
+            "ts",
+            "run_id",
+            "session_id",
+            "seq",
+            "name",
+            "payload"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

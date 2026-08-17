@@ -1,0 +1,47 @@
+{
+  "id": "L11_sql_syntax",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "stuck"
+    ],
+    "intervene_levels": [
+      "soft"
+    ]
+  },
+  "available_tools": [
+    "execute_sql",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "execute_sql",
+      "args": {
+        "query": "SELEC * FROM t"
+      },
+      "error": "syntax error"
+    },
+    {
+      "tool_name": "execute_sql",
+      "args": {
+        "query": "SELEC * FROM t"
+      },
+      "error": "syntax error"
+    },
+    {
+      "tool_name": "execute_sql",
+      "args": {
+        "query": "SELEC * FROM t"
+      },
+      "error": "syntax error"
+    },
+    {
+      "tool_name": "execute_sql",
+      "args": {
+        "query": "SELEC * FROM t"
+      },
+      "error": "syntax error"
+    }
+  ]
+}

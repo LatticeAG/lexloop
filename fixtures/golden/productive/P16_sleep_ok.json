@@ -1,0 +1,89 @@
+{
+  "id": "P16_sleep_ok",
+  "expect": {
+    "detect_any": true,
+    "classes": [
+      "productive"
+    ],
+    "intervene_levels": []
+  },
+  "available_tools": [
+    "sleep",
+    "bash",
+    "read_file"
+  ],
+  "steps": [
+    {
+      "tool_name": "sleep",
+      "args": {
+        "ms": 1000
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "sleep",
+      "args": {
+        "ms": 1000
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "sleep",
+      "args": {
+        "ms": 1000
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "sleep",
+      "args": {
+        "ms": 1000
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "sleep",
+      "args": {
+        "ms": 1000
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "sleep",
+      "args": {
+        "ms": 1000
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "sleep",
+      "args": {
+        "ms": 1000
+      },
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "tool_name": "sleep",
+      "args": {
+        "ms": 1000
+      },
+      "result": {
+        "ok": true
+      }
+    }
+  ]
+}

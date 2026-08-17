@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://latticeag.dev/schemas/lexloop-config/v1.json",
+  "title": "lexloop-config-v1",
+  "description": "Generated from packages/config Zod defaults. Source of truth is packages/config/src/schema.ts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "const": 1 },
+    "mode": { "enum": ["log-only", "intervene"], "default": "log-only" },
+    "log": { "type": "object", "additionalProperties": false },
+    "detect": { "type": "object", "additionalProperties": false },
+    "classify": { "type": "object", "additionalProperties": false },
+    "intervene": { "type": "object", "additionalProperties": false },
+    "axion": { "type": "object", "additionalProperties": false },
+    "run": { "type": "object", "additionalProperties": false },
+    "redaction": { "type": "object", "additionalProperties": false },
+    "proxy": { "type": "object", "additionalProperties": false },
+    "watch": { "type": "object", "additionalProperties": false },
+    "hosted": { "type": "object", "additionalProperties": false }
+  }
+}

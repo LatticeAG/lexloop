@@ -1,0 +1,30 @@
+{
+  "name": "@latticeag/lexloop-cli",
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "lexloop": "./dist/cli.js"
+  },
+  "exports": {
+    ".": "./src/cli.ts"
+  },
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "@latticeag/lexloop": "workspace:*",
+    "@latticeag/lexloop-core": "workspace:*",
+    "@latticeag/lexloop-config": "workspace:*",
+    "@latticeag/lexloop-events": "workspace:*",
+    "commander": "^12.1.0",
+    "execa": "^9.5.2",
+    "string-argv": "^0.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@types/string-argv": "^0.3.0",
+    "esbuild": "^0.25.9",
+    "typescript": "~5.8.3"
+  }
+}
