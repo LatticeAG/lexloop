@@ -1,5 +1,6 @@
-import { readdirSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   RunState,
   buildIntervention,
@@ -195,6 +196,24 @@ export async function replayFixture(fixture: GoldenFixture): Promise<GoldenRepla
   };
 }
 
+/**
+ * Golden corpus directory (`fixtures/golden`), resolved relative to this
+ * module — never the process cwd — so `lexloop bench golden` works from any
+ * working directory. The module URL lands in different spots depending on
+ * layout (repo `bench/` under tsx/vitest, `packages/cli/dist/` once bundled),
+ * so walk upward until a `fixtures/golden` directory exists.
+ */
+export function defaultGoldenDir(): string {
+  let dir = dirname(fileURLToPath(import.meta.url));
+  for (;;) {
+    const candidate = join(dir, "fixtures", "golden");
+    if (existsSync(candidate)) return candidate;
+    const parent = dirname(dir);
+    if (parent === dir) return resolve("fixtures", "golden");
+    dir = parent;
+  }
+}
+
 function listJsonFiles(dir: string): string[] {
   try {
     return readdirSync(dir)
@@ -214,12 +233,22 @@ function loadFile(path: string): GoldenFixture {
   return loadGoldenFixture(raw, name);
 }
 
-export async function runGoldenBench(dir = "fixtures/golden"): Promise<{
+export async function runGoldenBench(dir?: string): Promise<{
   result: GoldenBenchResult;
   replays: GoldenReplay[];
 }> {
-  const loopFiles = listJsonFiles(join(dir, "loops"));
-  const productiveFiles = listJsonFiles(join(dir, "productive"));
+  const root = dir ?? defaultGoldenDir();
+  const loopFiles = listJsonFiles(join(root, "loops"));
+  const productiveFiles = listJsonFiles(join(root, "productive"));
+  if (loopFiles.length === 0 && productiveFiles.length === 0) {
+    throw Object.assign(
+      new Error(
+        `LL4005 no golden fixtures found under ${root} ` +
+          `(expected .json files in ${join(root, "loops")} and ${join(root, "productive")})`,
+      ),
+      { code: "LL4005" },
+    );
+  }
   const detectMs: number[] = [];
   const replays: GoldenReplay[] = [];
 
