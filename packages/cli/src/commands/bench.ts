@@ -1,6 +1,7 @@
 import type { Command } from "commander";
 import { goldenPassed, runGoldenBench } from "../../../../bench/golden.ts";
 import { CI_FAIL_MS, detectLoadPassed, runDetectLoad } from "../../../../bench/detect_load.ts";
+import { exitWith, formatUnknown } from "../exit.ts";
 
 export function addBenchCommand(program: Command): void {
   const bench = program.command("bench").description("Golden corpus and detect load bench");
@@ -8,12 +9,15 @@ export function addBenchCommand(program: Command): void {
   bench
     .command("golden")
     .description("Replay fixtures/golden")
-    .option("--dir <dir>", "fixtures/golden", "fixtures/golden")
+    .option("--dir <dir>", "golden fixture dir (default: <package>/fixtures/golden)")
     .action(async (opts: { dir?: string }) => {
-      const dir = opts.dir ?? "fixtures/golden";
-      const { result } = await runGoldenBench(dir);
-      process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
-      if (!goldenPassed(result)) process.exit(3);
+      try {
+        const { result } = await runGoldenBench(opts.dir);
+        process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+        if (!goldenPassed(result)) process.exit(3);
+      } catch (err) {
+        exitWith(2, formatUnknown(err));
+      }
     });
 
   bench
