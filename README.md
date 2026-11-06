@@ -79,6 +79,8 @@ lexloop report <run-id>
 lexloop report <run-id> --json
 ```
 
+For a custom integration, `observe()` records tool activity and detects loops; it cannot modify the model input. In intervene mode, call `maybeInject()` with the messages immediately before each model call and use the returned messages. `watch` selects intervene mode by default, but does not inject on its own.
+
 LangGraph (custom kit — no `graph.attach()` in v0.1):
 
 ```ts
