@@ -68,7 +68,9 @@ pnpm --filter @latticeag/lexloop-cli build
 lexloop init        # writes lexloop.json defaults + creates .lexloop/
 lexloop doctor      # node, config, .lexloop/, proxy, redact checks
 
-# 3. Watch a run (default mode: intervene)
+# 3. Install @latticeag/lexloop in the agent project (e.g. pnpm add @latticeag/lexloop),
+#    or link it into that project from this workspace. The child resolves its own imports.
+#    Watch a run (default mode: intervene)
 lexloop watch --cmd "node my-agent.js" --attach openai-completions
 
 # 4. Replay offline (observe-only)
