@@ -53,7 +53,7 @@ Built by [LatticeAG](https://github.com/LatticeAG).
 
 - **Belief-graph classification, not a step counter** - detectors cover stuck runs, polling, ping-pong exchanges, cycles, and semantic stalls, each with tuned thresholds (`min_run`, `window`, `min_cycles`).
 - **Golden corpus + conformance** - `fixtures/golden` (loops vs productive) and `conformance/` (canonicalize parity, outcome cases) pin behavior; `lexloop bench golden` replays them.
-- **Kit adapters, not framework lock-in** - `--attach openai-completions|anthropic-messages|custom` instruments the run; LangGraph users call `maybeInject` from a `before_model` hook with no `graph.attach()` magic.
+- **Kit adapters, not framework lock-in** - wrap an OpenAI or Anthropic client in-process, or use the custom SDK integration. LangGraph users call `maybeInject` from a `before_model` hook with no `graph.attach()` magic.
 
 ## Quick Start
 
@@ -80,6 +80,8 @@ lexloop watch --from-jsonl .lexloop/events.jsonl
 lexloop report <run-id>
 lexloop report <run-id> --json
 ```
+
+In v0.1, `watch --attach openai-completions|anthropic-messages|custom` prints setup hints only; it does not intercept requests or start a proxy. Instrument the child process itself: pass its OpenAI client to `lex.wrapOpenAI(client)` or its Anthropic client to `lex.wrapAnthropic(client)` and use the returned client.
 
 For a custom integration, `observe()` records tool activity and detects loops; it cannot modify the model input. In intervene mode, call `maybeInject()` with the messages immediately before each model call and use the returned messages. `watch` selects intervene mode by default, but does not inject on its own.
 
