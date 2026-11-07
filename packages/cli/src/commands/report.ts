@@ -1,41 +1,13 @@
-import { existsSync, readFileSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, isAbsolute, join } from "node:path";
+import { readRunEvents, saveRunEvents, type JsonlEvent } from "../run-events.ts";
 import type { Command } from "commander";
 import { loadConfig } from "@latticeag/lexloop-config";
 import type { LoopClass, RunReport } from "@latticeag/lexloop-core";
 import { exitWith, formatUnknown } from "../exit.ts";
 
-type JsonlEvent = {
-  v?: string;
-  id?: string;
-  ts?: string;
-  run_id?: string;
-  session_id?: string;
-  seq?: number;
-  name?: string;
-  payload?: Record<string, unknown>;
-};
-
 function resolveLogPath(cwd: string, configured: string): string {
   return isAbsolute(configured) ? configured : join(cwd, configured);
-}
-
-function readEvents(path: string, runId: string): JsonlEvent[] {
-  if (!existsSync(path)) return [];
-  const text = readFileSync(path, "utf8");
-  const out: JsonlEvent[] = [];
-  for (const line of text.split(/\r?\n/)) {
-    const trimmed = line.trim();
-    if (trimmed === "") continue;
-    try {
-      const obj = JSON.parse(trimmed) as JsonlEvent;
-      if (obj.run_id === runId) out.push(obj);
-    } catch {
-      // skip malformed
-    }
-  }
-  return out;
 }
 
 function asString(v: unknown): string | undefined {
@@ -283,11 +255,7 @@ export function addReportCommand(program: Command): void {
       // shared log, which may be truncated or rotated between invocations.
       const runDir = join(process.cwd(), ".lexloop", "runs", encodeURIComponent(runId));
       const snapshotPath = join(runDir, "events.jsonl");
-      const saved = readEvents(snapshotPath, runId);
-      const current = readEvents(logPath, runId);
-      const seen = new Set(saved.map((event) => event.id).filter(Boolean));
-      const events = [...saved, ...current.filter((event) => !event.id || !seen.has(event.id))]
-        .sort((a, b) => (a.seq ?? 0) - (b.seq ?? 0));
+      const events = readRunEvents(snapshotPath, logPath, runId);
       if (events.length === 0) {
         exitWith(2, `LL4003 run unknown: ${runId}`);
       }
@@ -296,7 +264,7 @@ export function addReportCommand(program: Command): void {
       const outPath = join(runDir, "report.json");
       try {
         await mkdir(dirname(outPath), { recursive: true });
-        await writeFile(snapshotPath, events.map((event) => JSON.stringify(event)).join("\n") + "\n", "utf8");
+        await saveRunEvents(snapshotPath, events);
         await writeFile(outPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
       } catch (err) {
         process.stderr.write(`[lexloop] persist_fail ${formatUnknown(err)}\n`);

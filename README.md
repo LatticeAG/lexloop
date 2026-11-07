@@ -128,7 +128,7 @@ flowchart LR
 | `lexloop doctor` | Check Node, config, local wiring, proxy port, and redact posture. |
 | `lexloop version` | Print `0.1.0`. |
 
-`report` reads the configured `log.path` and saves a per-run snapshot of the events it finds. Subsequent reports combine that snapshot with current events, so previously reported runs remain available if the shared log is truncated or rotated. Events lost before the first report are not recovered from rotated archives.
+`watch` saves a per-run snapshot of the events present when the child exits. `report` combines that snapshot with the configured `log.path` and updates it, so runs remain available if the shared log is subsequently truncated or rotated. Events lost before the snapshot are not recovered from rotated archives.
 
 ### Detection & Intervention
 

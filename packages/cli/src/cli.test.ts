@@ -115,6 +115,22 @@ describe("lexloop cli", () => {
     expect(run(["report", "unknown-run"], { cwd: dir }).status).toBe(2);
   });
 
+  it("retains watched events if the log is truncated before the first report", () => {
+    const dir = mkdtempSync(join(tmpdir(), "lexloop-cli-"));
+    dirs.push(dir);
+    expect(run(["init"], { cwd: dir }).status).toBe(0);
+    const script = join(dir, "agent.cjs");
+    writeFileSync(script, `const fs = require("node:fs");
+const event = { id: "event-1", run_id: process.env.LEXLOOP_RUN_ID, session_id: "session", seq: 1, name: "loop_classified", payload: { class: "stuck" } };
+fs.appendFileSync(process.env.LATTICEAG_EVENTS_PATH, JSON.stringify(event) + "\\n");`);
+    const watched = run(["watch", "--cmd", `node ${script}`], { cwd: dir, env: { LEXLOOP_RUN_ID: "watched-run" } });
+    expect(watched.status).toBe(0);
+    writeFileSync(join(dir, ".lexloop", "events.jsonl"), "");
+    const report = run(["report", "watched-run"], { cwd: dir });
+    expect(report.status).toBe(0);
+    expect(report.stdout).toContain("stuck: 1");
+  });
+
   it("watch --from-jsonl with --mode intervene exits 2", () => {
     const dir = mkdtempSync(join(tmpdir(), "lexloop-cli-"));
     dirs.push(dir);
