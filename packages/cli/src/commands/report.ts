@@ -1,41 +1,13 @@
-import { existsSync, readFileSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, isAbsolute, join } from "node:path";
+import { readRunEvents, saveRunEvents, type JsonlEvent } from "../run-events.ts";
 import type { Command } from "commander";
 import { loadConfig } from "@latticeag/lexloop-config";
 import type { LoopClass, RunReport } from "@latticeag/lexloop-core";
 import { exitWith, formatUnknown } from "../exit.ts";
 
-type JsonlEvent = {
-  v?: string;
-  id?: string;
-  ts?: string;
-  run_id?: string;
-  session_id?: string;
-  seq?: number;
-  name?: string;
-  payload?: Record<string, unknown>;
-};
-
 function resolveLogPath(cwd: string, configured: string): string {
   return isAbsolute(configured) ? configured : join(cwd, configured);
-}
-
-function readEvents(path: string, runId: string): JsonlEvent[] {
-  if (!existsSync(path)) return [];
-  const text = readFileSync(path, "utf8");
-  const out: JsonlEvent[] = [];
-  for (const line of text.split(/\r?\n/)) {
-    const trimmed = line.trim();
-    if (trimmed === "") continue;
-    try {
-      const obj = JSON.parse(trimmed) as JsonlEvent;
-      if (obj.run_id === runId) out.push(obj);
-    } catch {
-      // skip malformed
-    }
-  }
-  return out;
 }
 
 function asString(v: unknown): string | undefined {
@@ -279,15 +251,20 @@ export function addReportCommand(program: Command): void {
         exitWith(2, formatUnknown(err));
       }
 
-      const events = readEvents(logPath, runId);
+      // Keep the redacted event history used by a report independently of the
+      // shared log, which may be truncated or rotated between invocations.
+      const runDir = join(process.cwd(), ".lexloop", "runs", encodeURIComponent(runId));
+      const snapshotPath = join(runDir, "events.jsonl");
+      const events = readRunEvents(snapshotPath, logPath, runId);
       if (events.length === 0) {
         exitWith(2, `LL4003 run unknown: ${runId}`);
       }
 
       const report = buildReport(runId, events, mode);
-      const outPath = join(process.cwd(), ".lexloop", "runs", runId, "report.json");
+      const outPath = join(runDir, "report.json");
       try {
         await mkdir(dirname(outPath), { recursive: true });
+        await saveRunEvents(snapshotPath, events);
         await writeFile(outPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
       } catch (err) {
         process.stderr.write(`[lexloop] persist_fail ${formatUnknown(err)}\n`);

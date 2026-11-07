@@ -53,7 +53,7 @@ Built by [LatticeAG](https://github.com/LatticeAG).
 
 - **Belief-graph classification, not a step counter** - detectors cover stuck runs, polling, ping-pong exchanges, cycles, and semantic stalls, each with tuned thresholds (`min_run`, `window`, `min_cycles`).
 - **Golden corpus + conformance** - `fixtures/golden` (loops vs productive) and `conformance/` (canonicalize parity, outcome cases) pin behavior; `lexloop bench golden` replays them.
-- **Kit adapters, not framework lock-in** - `--attach openai-completions|anthropic-messages|custom` instruments the run; LangGraph users call `maybeInject` from a `before_model` hook with no `graph.attach()` magic.
+- **Kit adapters, not framework lock-in** - wrap an OpenAI or Anthropic client in-process, or use the custom SDK integration. LangGraph users call `maybeInject` from a `before_model` hook with no `graph.attach()` magic.
 
 ## Quick Start
 
@@ -68,7 +68,9 @@ pnpm --filter @latticeag/lexloop-cli build
 lexloop init        # writes lexloop.json defaults + creates .lexloop/
 lexloop doctor      # node, config, .lexloop/, proxy, redact checks
 
-# 3. Watch a run (default mode: intervene)
+# 3. Install @latticeag/lexloop in the agent project (e.g. pnpm add @latticeag/lexloop),
+#    or link it into that project from this workspace. The child resolves its own imports.
+#    Watch a run (default mode: intervene)
 lexloop watch --cmd "node my-agent.js" --attach openai-completions
 
 # 4. Replay offline (observe-only)
@@ -78,6 +80,10 @@ lexloop watch --from-jsonl .lexloop/events.jsonl
 lexloop report <run-id>
 lexloop report <run-id> --json
 ```
+
+In v0.1, `watch --attach openai-completions|anthropic-messages|custom` prints setup hints only; it does not intercept requests or start a proxy. Instrument the child process itself: pass its OpenAI client to `lex.wrapOpenAI(client)` or its Anthropic client to `lex.wrapAnthropic(client)` and use the returned client.
+
+For a custom integration, `observe()` records tool activity and detects loops; it cannot modify the model input. In intervene mode, call `maybeInject()` with the messages immediately before each model call and use the returned messages. `watch` selects intervene mode by default, but does not inject on its own.
 
 LangGraph (custom kit — no `graph.attach()` in v0.1):
 
@@ -121,6 +127,8 @@ flowchart LR
 | `lexloop bench golden\|detect` | Replay `fixtures/golden`, or run the synthetic detect-latency bench. |
 | `lexloop doctor` | Check Node, config, local wiring, proxy port, and redact posture. |
 | `lexloop version` | Print `0.1.0`. |
+
+`watch` saves a per-run snapshot of the events present when the child exits. `report` combines that snapshot with the configured `log.path` and updates it, so runs remain available if the shared log is subsequently truncated or rotated. Events lost before the snapshot are not recovered from rotated archives.
 
 ### Detection & Intervention
 
@@ -169,6 +177,8 @@ pnpm --filter @latticeag/lexloop-cli build
 pnpm test        # vitest run over packages/**
 pnpm typecheck   # tsc --noEmit
 ```
+
+`bench golden` checks the bundled labeled fixtures; `watch --from-jsonl` replays input for observation only and cannot inject interventions.
 
 Test suite (verified): **171 passed, 0 failed across 20 test files** — detectors, canonicalize (13), redact (14), budget, ids, signature, SDK attach/splice, events-ext schema, and config load.
 
