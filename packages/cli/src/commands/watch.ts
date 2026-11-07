@@ -8,6 +8,7 @@ import { loadConfig, type LexLoopConfig } from "@latticeag/lexloop-config";
 import { RunState, newRunId, newSessionId } from "@latticeag/lexloop-core";
 import { recordGoldenStep, loadGoldenFixture } from "../../../../bench/golden.ts";
 import { exitWith, formatUnknown } from "../exit.ts";
+import { readRunEvents, saveRunEvents } from "../run-events.ts";
 
 function resolveArgv(cmd: string | string[] | undefined): string[] | undefined {
   if (cmd === undefined) return undefined;
@@ -254,6 +255,15 @@ export function addWatchCommand(program: Command): void {
         reject: false,
         env: { ...process.env, ...injected },
       });
+
+      // Preserve this run before the shared log can be truncated or rotated.
+      try {
+        const snapshotPath = join(cwd, ".lexloop", "runs", encodeURIComponent(runId), "events.jsonl");
+        const events = readRunEvents(snapshotPath, logPath, runId);
+        if (events.length > 0) await saveRunEvents(snapshotPath, events);
+      } catch (err) {
+        process.stderr.write(`[lexloop] persist_fail ${formatUnknown(err)}\n`);
+      }
 
       if (opts.requireSdk) {
         const deadline = start + timeout;
