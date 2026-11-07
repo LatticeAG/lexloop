@@ -279,15 +279,24 @@ export function addReportCommand(program: Command): void {
         exitWith(2, formatUnknown(err));
       }
 
-      const events = readEvents(logPath, runId);
+      // Keep the redacted event history used by a report independently of the
+      // shared log, which may be truncated or rotated between invocations.
+      const runDir = join(process.cwd(), ".lexloop", "runs", encodeURIComponent(runId));
+      const snapshotPath = join(runDir, "events.jsonl");
+      const saved = readEvents(snapshotPath, runId);
+      const current = readEvents(logPath, runId);
+      const seen = new Set(saved.map((event) => event.id).filter(Boolean));
+      const events = [...saved, ...current.filter((event) => !event.id || !seen.has(event.id))]
+        .sort((a, b) => (a.seq ?? 0) - (b.seq ?? 0));
       if (events.length === 0) {
         exitWith(2, `LL4003 run unknown: ${runId}`);
       }
 
       const report = buildReport(runId, events, mode);
-      const outPath = join(process.cwd(), ".lexloop", "runs", runId, "report.json");
+      const outPath = join(runDir, "report.json");
       try {
         await mkdir(dirname(outPath), { recursive: true });
+        await writeFile(snapshotPath, events.map((event) => JSON.stringify(event)).join("\n") + "\n", "utf8");
         await writeFile(outPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
       } catch (err) {
         process.stderr.write(`[lexloop] persist_fail ${formatUnknown(err)}\n`);

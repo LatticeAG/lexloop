@@ -128,7 +128,7 @@ flowchart LR
 | `lexloop doctor` | Check Node, config, local wiring, proxy port, and redact posture. |
 | `lexloop version` | Print `0.1.0`. |
 
-`report` reads only the currently configured `log.path`; it does not search rotated archives or saved report files. If that log is deleted, truncated, or rotated, runs with no remaining events there return `LL4003`. Preserve the log or restore the relevant archive to the configured path before reporting on older runs. A run split across logs requires combining its event lines into the current log for a complete report.
+`report` reads the configured `log.path` and saves a per-run snapshot of the events it finds. Subsequent reports combine that snapshot with current events, so previously reported runs remain available if the shared log is truncated or rotated. Events lost before the first report are not recovered from rotated archives.
 
 ### Detection & Intervention
 

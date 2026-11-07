@@ -92,6 +92,29 @@ describe("lexloop cli", () => {
     expect(out).toMatch(/node:/);
   });
 
+  it("retains a complete report after the shared log is truncated", () => {
+    const dir = mkdtempSync(join(tmpdir(), "lexloop-cli-"));
+    dirs.push(dir);
+    expect(run(["init"], { cwd: dir }).status).toBe(0);
+    const log = join(dir, ".lexloop", "events.jsonl");
+    const event = (id: string, runId: string, seq: number, name: string, payload: object) =>
+      JSON.stringify({ v: "lexloop/v1", id, run_id: runId, session_id: "session", seq, name, payload });
+    const other = event("other", "other-run", 1, "run_summary", {});
+    const detection = event("detection", "target-run", 1, "loop_detected", { cluster_id: "cluster", tool_name: "lookup", run_length: 4 });
+    const classification = event("classification", "target-run", 2, "loop_classified", { cluster_id: "cluster", class: "stuck", rule_id: "R09" });
+    writeFileSync(log, [other, detection, classification, ""].join("\n"));
+    const before = run(["report", "target-run"], { cwd: dir });
+    expect(before.status).toBe(0);
+    expect(before.stdout).toContain("stuck: 1");
+    writeFileSync(log, other + "\n");
+    const after = run(["report", "target-run"], { cwd: dir });
+    expect(after.status).toBe(0);
+    expect(after.stdout).toBe(before.stdout);
+    writeFileSync(log, detection + "\n");
+    expect(run(["report", "target-run"], { cwd: dir }).stdout).toBe(before.stdout);
+    expect(run(["report", "unknown-run"], { cwd: dir }).status).toBe(2);
+  });
+
   it("watch --from-jsonl with --mode intervene exits 2", () => {
     const dir = mkdtempSync(join(tmpdir(), "lexloop-cli-"));
     dirs.push(dir);
